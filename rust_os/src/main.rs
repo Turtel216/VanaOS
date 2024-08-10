@@ -1,4 +1,5 @@
-#![no_std]
+#![no_std] // disable standard libray
+#![no_main] // disable standard entry points
 
 use core::panic::PanicInfo;
 
@@ -8,4 +9,9 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 
-fn main() {}
+// Entry Point
+#[no_mangle] // don't auto generate function names
+pub extern "C" fn _start() -> ! {
+    loop {}
+}
+//############
