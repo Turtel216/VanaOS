@@ -15,11 +15,13 @@ fn panic(_info: &PanicInfo) -> ! {
 #[no_mangle] // don't auto generate function names
 pub extern "C" fn _start() -> ! {
     use core::fmt::Write;
+    // create text buffer
     vga_buffer::WRITER
         .lock()
         .write_str("Hello Kernel!")
         .unwrap();
 
+    // print text buffer to screen
     write!(vga_buffer::WRITER.lock(), ", some numbers: {} {}", 42, 15.3).unwrap();
 
     loop {}
