@@ -1,23 +1,26 @@
 #![no_std]
 #![no_main]
 #![feature(custom_test_frameworks)]
-#![test_runner(crate::test_runner)]
 #![reexport_test_harness_main = "test_main"]
+#![test_runner(rust_os::test_runner)]
 
 use core::panic::PanicInfo;
+use rust_os::kprintln;
 
-#[no_mangle]
-pub extern "C" fn _start() -> ! {
-    test_main();
-
-    loop {}
-}
-
-fn test_runner(_tests: &[&dyn Fn()]) {
-    unimplemented!();
+#[test_case]
+fn test_println() {
+    kprintln!("test_println output");
 }
 
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    rust_os::test_panic_handler(info)
+}
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    #[cfg(test)]
+    test_main();
+
     loop {}
 }
