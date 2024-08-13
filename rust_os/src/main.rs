@@ -11,8 +11,14 @@ use rust_os::kprintln;
 pub extern "C" fn _start() -> ! {
     kprintln!("Hello Kernel{}", "!");
 
+    rust_os::init();
+
+    x86_64::instructions::interrupts::int3(); // Cause break point exception
+
     #[cfg(test)]
     test_main();
+
+    kprintln!("Still Here!");
 
     loop {}
 }
