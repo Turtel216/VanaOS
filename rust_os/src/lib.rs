@@ -11,6 +11,7 @@ pub mod interrupts;
 pub mod serial;
 pub mod vga_buffer;
 
+// Start up kernel systems
 pub fn init() {
     interrupts::init_idt();
 }
