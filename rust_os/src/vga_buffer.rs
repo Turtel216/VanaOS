@@ -142,6 +142,8 @@ impl fmt::Write for Writer {
     }
 }
 
+// VGA BUFFER TESTS
+
 #[test_case]
 fn test_println_simple() {
     kprintln!("test_println_simple output");
@@ -163,3 +165,5 @@ fn test_println_output() {
         assert_eq!(char::from(screen_char.ascii_character), c);
     }
 }
+
+//#################
