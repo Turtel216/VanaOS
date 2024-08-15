@@ -16,6 +16,10 @@ pub mod vga_buffer;
 pub fn init() {
     gdt::init_gdt();
     interrupts::init_idt();
+    // Initialize interrupt controller
+    unsafe { interrupts::PICS.lock().initialize() };
+    // Enable interrupts
+    x86_64::instructions::interrupts::enable();
 }
 
 pub trait Testable {
