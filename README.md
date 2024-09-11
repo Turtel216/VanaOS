@@ -2,9 +2,9 @@
 
 ### About
 
-An Operating System wirtten in Rust. Based on the series of of tutorials [Writing an OS in Rust](https://os.phil-opp.com/).
+An Operating System wirtten in Rust. Based on the series of tutorials [Writing an OS in Rust](https://os.phil-opp.com/). The main purpose of this project is to get a better understanding of bare metal Rust and the advantages and disadvantages of the language in OS Development.
 
-### Build Instruction
+## Build Instruction
 
 1. Clone the Repository
 
