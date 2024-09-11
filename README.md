@@ -39,7 +39,8 @@ An Operating System wirtten in Rust. Based on the series of of tutorials [Writin
     cargo run
     ```
 
-or
+7. Run Tests
+
     ```
     cargo test
     ```
