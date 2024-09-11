@@ -16,7 +16,8 @@ pub extern "C" fn _start() -> ! {
     #[cfg(test)]
     test_main();
 
-    loop {}
+    kprintln!("It did not crash!");
+    rust_os::hlt_loop();
 }
 
 /// This function is called on panic.
@@ -24,7 +25,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     kprintln!("{}", info);
-    loop {}
+    rust_os::hlt_loop();
 }
 
 #[cfg(test)]
