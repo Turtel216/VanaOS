@@ -1,46 +1,108 @@
-# Rust-OS
+# VanaOS
 
-### About
+> A microkernel operating system written in Rust, built for learning and experimentation.
 
-An Operating System wirtten in Rust. Based on the series of tutorials [Writing an OS in Rust](https://os.phil-opp.com/). The main purpose of this project is to get a better understanding of bare metal Rust and the advantages and disadvantages of the language in OS Development.
+---
 
-## Build Instruction
+## 🚀 About
 
-1. Clone the Repository
+**VanaOS** is a hobby operating system developed in Rust, inspired by the excellent [Writing an OS in Rust](https://os.phil-opp.com/) tutorial series by Philipp Oppermann.
 
-    ```
-    git clone https://github.com/Turtel216/Rust-OS.git
-    cd Rust-OS/rust_os
-    ```
+The primary goal of this project is to gain a deeper understanding of:
+- **Low-level systems programming**
+- **Bare-metal development**
+- **Operating system concepts**
+- The **advantages and limitations of using Rust** for OS development
 
-2. Install the qemu-system-x86_64 Virtual Machine according to your system: [Qemu Installation Guide](https://www.qemu.org/download/#linux)
+This project is built from scratch with no standard library, targeting `x86_64` architecture.
 
-3. Install Rust nightly
+---
 
-    ```
-    rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
-    ```
+## 🛠️ Features
 
-4. Install bootimage
+- ✅ Bare-metal kernel written in Rust
+- ✅ Custom minimal bootloader using [`bootimage`](https://github.com/rust-osdev/bootimage)
+- ✅ Runs on `qemu-system-x86_64`
+- ✅ Paging, memory management
+- 🚧 Task scheduling, and system calls (in progress)
+- 🧪 Unit and integration tests for kernel components
 
-    ```
-    cargo install bootimage
-    ```
+---
 
-5. Install llvm-tools-preview
+## 🧰 Prerequisites
 
-    ```
-    rustup component add llvm-tools-preview
-    ```
+Before building VanaOS, make sure the following are installed on your system:
 
-6. Ensure everything worked:
+- [Rust (nightly)](https://rustup.rs/)
+- [QEMU (x86_64)](https://www.qemu.org/download/)
+- `bootimage` and `llvm-tools-preview` components
 
-    ```
-    cargo run
-    ```
+---
 
-7. Run Tests
+## 🧱 Build Instructions
 
-    ```
-    cargo test
-    ```
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Turtel216/VanaOS.git
+   cd VanaOS
+   ```
+
+2. **Install QEMU**
+   Follow the instructions for your platform: [QEMU Installation Guide](https://www.qemu.org/download/)
+
+3. **Install Rust nightly toolchain**
+   ```bash
+   rustup install nightly
+   rustup override set nightly
+   rustup component add rust-src --toolchain nightly
+   ```
+
+4. **Install required components**
+   ```bash
+   cargo install bootimage
+   rustup component add llvm-tools-preview
+   ```
+
+5. **Build and run the OS**
+   ```bash
+   cargo bootimage
+   qemu-system-x86_64 -drive format=raw,file=target/x86_64-unknown-none/debug/bootimage-VanaOS.bin
+   ```
+
+6. **Run tests**
+   ```bash
+   cargo test
+   ```
+
+---
+
+## 🔍 Project Structure
+
+```
+VanaOS/
+├── src/                # Kernel source code
+├── Cargo.toml          # Project manifest
+├── .cargo/config.toml  # Build target configuration
+└── bootimage.toml      # Bootloader config
+```
+
+---
+
+## 📚 Resources & Inspirations
+
+- [Writing an OS in Rust](https://os.phil-opp.com/)
+- [Rust OSDev](https://osdev.org/)
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
+- [QEMU Documentation](https://wiki.qemu.org/Main_Page)
+
+---
+
+## 🤝 Contributing
+
+This is a personal learning project, but contributions, suggestions, or ideas are always welcome! Feel free to open issues or submit pull requests.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
