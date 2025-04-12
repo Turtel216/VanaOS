@@ -65,8 +65,7 @@ Before building VanaOS, make sure the following are installed on your system:
 
 5. **Build and run the OS**
    ```bash
-   cargo bootimage
-   qemu-system-x86_64 -drive format=raw,file=target/x86_64-unknown-none/debug/bootimage-VanaOS.bin
+   cargo run
    ```
 
 6. **Run tests**
@@ -82,8 +81,7 @@ Before building VanaOS, make sure the following are installed on your system:
 VanaOS/
 ├── src/                # Kernel source code
 ├── Cargo.toml          # Project manifest
-├── .cargo/config.toml  # Build target configuration
-└── bootimage.toml      # Bootloader config
+└── .cargo/config.toml  # Build target configuration
 ```
 
 ---
