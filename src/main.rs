@@ -8,9 +8,21 @@ extern crate alloc;
 
 use bootloader::{entry_point, BootInfo};
 use core::panic::PanicInfo;
+use rust_os::task::{simple_executor::SimpleExecutor, Task};
 use rust_os::{allocator, kprintln, memory::BootInfoFrameAllocator};
 
 entry_point!(kernel_main);
+
+// Dummy code to testing
+async fn async_number() -> u32 {
+    42
+}
+
+// Dummy code to testing
+async fn example_task() {
+    let number = async_number().await;
+    kprintln!("async number: {}", number);
+}
 
 fn kernel_main(boot_info: &'static BootInfo) -> ! {
     use rust_os::memory;
@@ -24,6 +36,10 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
     let mut frame_allocator = unsafe { BootInfoFrameAllocator::init(&boot_info.memory_map) };
 
     allocator::init_heap(&mut mapper, &mut frame_allocator).expect("Heap initialization failed");
+
+    let mut executor = SimpleExecutor::new();
+    executor.spawn(Task::new(example_task()));
+    executor.run();
 
     #[cfg(test)]
     test_main();
