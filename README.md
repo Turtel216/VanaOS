@@ -24,7 +24,8 @@ This project is built from scratch with no standard library, targeting `x86_64` 
 - ✅ Custom minimal bootloader using [`bootimage`](https://github.com/rust-osdev/bootimage)
 - ✅ Runs on `qemu-system-x86_64`
 - ✅ Paging, memory management
-- 🚧 Task scheduling, and system calls (in progress)
+- ✅ Cooperative multitasking
+- 🚧 Preemptive Task scheduling, and system calls (in progress)
 - 🧪 Unit and integration tests for kernel components
 
 ---
