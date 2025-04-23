@@ -9,7 +9,6 @@
 **VanaOS** is a hobby operating system developed in Rust, inspired by the excellent [Writing an OS in Rust](https://os.phil-opp.com/) tutorial series by Philipp Oppermann.
 
 The primary goal of this project is to gain a deeper understanding of:
-- **Low-level systems programming**
 - **Bare-metal development**
 - **Operating system concepts**
 - The **advantages and limitations of using Rust** for OS development
