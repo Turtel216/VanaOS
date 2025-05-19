@@ -10,7 +10,7 @@ use bootloader::{entry_point, BootInfo};
 use core::panic::PanicInfo;
 use rust_os::task::Task;
 use rust_os::task::executor::Executor;
-use rust_os::{allocator, kprintln, memory::BootInfoFrameAllocator};
+use rust_os::{allocator, kprintln, kprint, memory::BootInfoFrameAllocator};
 use rust_os::task::keyboard;
 
 entry_point!(kernel_main);
@@ -21,17 +21,28 @@ async fn async_number() -> u32 {
 }
 
 // Dummy code to testing
-async fn example_task() {
-    let number = async_number().await;
-    kprintln!("async number: {}", number);
-}
+// async fn example_task() {
+//     let number = async_number().await;
+//     kprintln!("async number: {}", number);
+// }
 
 fn kernel_main(boot_info: &'static BootInfo) -> ! {
     use rust_os::memory;
     use x86_64::VirtAddr;
 
-    kprintln!("Hello Kernel{}", "!");
     rust_os::init();
+
+    kprintln!(
+r#"
+ __      __                ____   _____
+ \ \    / /               / __ \ / ____|
+  \ \  / /_ _ _ __   __ _| |  | | (___
+   \ \/ / _` | '_ \ / _` | |  | |\___ \
+    \  / (_| | | | | (_| | |__| |____) |
+     \/ \__,_|_| |_|\__,_|\____/|_____/
+"#);
+
+    kprint!("> ");
 
     let phys_mem_offset = VirtAddr::new(boot_info.physical_memory_offset);
     let mut mapper = unsafe { memory::init(phys_mem_offset) };
@@ -40,8 +51,8 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
     allocator::init_heap(&mut mapper, &mut frame_allocator).expect("Heap initialization failed");
 
     let mut executor = Executor::new();
-    executor.spawn(Task::new(example_task()));
-    executor.spawn(Task::new(keyboard::print_keypresses())); // new
+    // executor.spawn(Task::new(example_task()));
+    executor.spawn(Task::new(keyboard::print_keypresses()));
     executor.run();
 
     #[cfg(test)]
